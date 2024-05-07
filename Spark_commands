@@ -1,0 +1,77 @@
+https://www.apache.org/dyn/closer.lua/spark/spark-3.3.2/spark-3.3.2-bin-hadoop3.tgz
+spark-shell
+
+>>Spark.version
+>>Print(“hello spark”)
+
+val: creates an immutable variable
+val.collect is used to return the output
+
+wordcount: (use "valname".collect to retrieve the info)
+>>val data= sc.textFile("sparkdata.txt");                    
+>>val splitdata = data.flatMap(line => line.split("")); 
+>>val mapdata = splitdata.map(word => (word,1));
+>>val reducedata = mapdata.reduceByKey(_+_);
+
+RDD Shared Variables
+>>val info = Array(1,2,3,4)
+>>val distinfo = sc.parallelize(info)
+>>val v = sc.broadcast(Array(1, 2, 3))
+>>v.value
+>>val a=sc.longAccumulator("Accumulator")
+>>sc.parallalize(Array(2, 5)).foreach(x=>a.add(x))
+>>a.value
+
+Map function
+>>val data1 = sc.parallelize(List(10, 20, 30))
+>>val mapfunc = data1.map(x => x+10)
+
+Filter Function
+>>val data2 = sc.parallelize(List(10, 20, 30, 40))
+>>data2.collect;
+>>val filterfunc = data2.filter(x => x!=35)
+>>filterfunc.collect
+
+Count Function
+>>val data = sc.parallelize(List(1, 2, 3, 4, 5))
+>>val countfunc = data.count()
+
+Distinct Function
+>>val data1 = sc.parallelize(List(10, 20, 30, 40))
+>>val distinctfunc = data1.distinct()
+
+Union Function
+>>val unionfunc = data.union(data1)
+
+Intersection Tool
+>>val data2 = sc.parallelize(List(1, 20, 40))
+>>val intersectfunc = data1.intersection(data2)
+
+Cartesian Function
+>>Val cartesianfunc = data1.cartesian(data2)
+
+SortByKey
+>>val data = sc.parallize(Seq(("C",3),("A",1),("D",4),("B",2),("E",5)));
+>>val sortfunc = data.sortByKey()
+
+groupByKey
+>>val data1  = sc.parallize(Seq(("C",3),("A",1),("B",4),("A",4),("B",5)));
+>>val groupfunc = data.groupByKey()
+>>groupfunc.collect
+
+reduceByKey Function 
+>>val reducefunc = data.reduceByKey((value, x) => (value + x))
+
+Cogroup Function 
+>>val data1  = sc.parallize(Seq(("A",1),("B",2),("C",3)));
+>>val data2 = sc.parallize(seq(("B",4),("E",5)))
+>>val cogroupfunc = data1.cogroup(data2)
+>>cogroupfunc.collect
+
+First Function:
+>>val data = sc.parallelize(List(10,20,30,40,50))
+>>val firstfunc = data.first()
+
+Take Function
+>>val data = sc.parallelize(List(10,20,30,40,50))
+>>val takefun = data.take(3)
