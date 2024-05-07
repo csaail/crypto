@@ -1,0 +1,104 @@
+Starting Hadoop and pig
+>>Cd C:\hadoop-3.3.1\sbin
+>>Start-all.cmd
+>>Pig –x local
+LOAD AND DUMP:
+>>A = load ‘data.txt as (lines);
+>>dump A;
+DESCRIBE: 
+>>Describe A; 
+
+CROSS PRDOUCT:
+>>C1 = load 'pcross1.txt' using PigStorage(',') as (a1:int,a2:int);
+>>C2 = load 'pcross2.txt' using PigStorage(',') as(a1:int,a2:int,a3:int);
+>>result = cross C1,C2; 
+>>dump result;
+Store:
+>>store result into 'PigFolder';
+
+FILTER: Will filter input based on a criteria provided.
+>>b = load 'filter.txt' using PigStorage(',') as (a1:int,a2:int);
+>>dump b;
+>>result = filter b by a2==8; 
+dump result;
+
+FOREACH: Generates data transformations based on columns of data.
+>>a = load 'foreach.txt' using PigStorage(',') as (a1:int,a2:int,a3:int);
+>>dump a;
+>>fe = foreach a generate a1,a2;
+>>dump fe; 
+
+GROUP operator is used to group the data in one or more relations
+>>A = load 'input.txt' using PigStorage(',') as (fname:chararray,lname,chararray,id:int);
+>>dump A; 
+>>groupFname = group A by fname; dump
+>>groupFname; 
+
+LIMIT: Limit no of output tuples
+>>l = load 'limit.txt' using PigStorage(',') as (a1:int,a2:int,a3:int);
+>>dump l;
+>>result = limit l 2;
+>>dump result;
+
+ORDER BY:The Apache Pig ORDER BY operator sorts a relation based on one or more fields. 
+>>o = load 'order.txt' using PigStorage(',') as (a1:int,a2:int,a3:int);
+>>dump o;
+>>result = order o by a1 desc;
+>>Dump result; 
+
+SPLIT:SPLIT operator breaks the relation into two or more relations according to
+the provided expression
+>>s = load 'split.txt' using PigStorage(',') as (a1:int,a2:int);
+>>dump s;
+>>split s into x if a1<=2, y if a1>2;
+>>dump x;
+
+DISTINCT: Used to remove duplicate tuples in a relation. Pig sorts the data and then eliminated duplicates
+>>d = load 'distinct.txt' using PigStorage(',') as (a1:int,a2:int,a3:int);
+>dump d;
+>>result = distinct d;
+>>dump result; 
+
+JOIN:The JOIN operator is used to combine records from two or more relations. 
+a. Self Join : Used to join a table with itself, as if there are 2 relations, temporarily
+renaming at least 1 relation
+>>a = load 'customers.txt' using PigStorage(',') as
+(id:int,name:chararray,age:int,address:chararray,salary:int);
+>>b = load 'customers.txt' using PigStorage(',') as
+(id:int,name:chararray,age:int,address:chararray,salary:int);
+>>result = join a by id, b by id;
+>>dump result; 
+
+b. Inner Join : Also referred to as Equijoin. Returns rows if there is a match in both
+tables.
+>>a = load 'customers.txt' using PigStorage(',') as
+(id:int,name:chararray,age:int,address:chararray,salary:int);
+>>b = load 'orders.txt' using PigStorage(',') as
+(oid:int,date:chararray,customer_id:int,amount:int);
+>>c = join a by id, b by customer_id;
+>>dump c;
+
+c. Outer Join : Returns all rows from at least one of the relations. Can be Left outer
+join, Right outer join, or full outer join.
+1. Left outer join : Returns all rows from the left table, even if there are no
+matches in the right relation.
+2. Right outer join : Returns all rows from the right table, even if there are no
+matches in the left table
+3. Full Outer Join : Returns all rows when there is a match in match in one of the
+relations
+>>d = join a by id LEFT OUTER, b by customer_id;
+>>dump d;
+>>e = join a by id Right, b by customer_id;
+>>dump e; 
+>>f = join a by id full outer, b by customer_id;
+>>dump f;
+
+Working with a csv file
+>>sales = load 'sales.csv' using PigStorage(',') as
+(tdate:chararray,product:chararray,price:chararray,ptype:chararray,city:chararray);
+>>dump sales;
+>>groupByCity = group sales by city;
+>>dump groupByCity;
+>>countByCity = foreach groupByCity GENERATE
+>>CONCAT((chararray)$0,CONCAT(':',(chararray)COUNT($1)));
+>>store countByCity into 'pig_output_sales' using PigStorage('\t');
