@@ -27,13 +27,3 @@ Data manipulation commands:
 >>deleteall <'tablename'>, <'rowname'>
 >>truncate <tablename> 
 >>scan <'tablename'>
-
-4 hive commands[ till create table]
->>show databases;
->>create database demo;
->>drop database demo;
->>describe database extended demo;
->>create table demo.employee (Id int, Name string , Salary float) row format delimited fields terminated by ',' ;
->>describe demo.employee;
->>use demo;
->>drop table demo.employee;
