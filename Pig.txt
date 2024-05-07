@@ -1,3 +1,5 @@
+https://downloads.apache.org/pig/pig-0.17.0/
+
 Starting Hadoop and pig
 >>Cd C:\hadoop-3.3.1\sbin
 >>Start-all.cmd
