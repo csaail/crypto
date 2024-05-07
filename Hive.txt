@@ -1,3 +1,5 @@
+https://dlcdn.apache.org/hive/ 
+
 >>show databases;
 >>create database demo;
 >>drop database demo;
