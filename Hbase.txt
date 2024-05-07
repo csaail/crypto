@@ -1,3 +1,6 @@
+https://archive.apache.org/dist/hbase/2.2.5/ 
+
+
 Status: This command will give details about the system status like a number of servers present in the cluster, active server count, and average load value.
 >>status
 >>status 'summary' 
