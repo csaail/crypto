@@ -1,0 +1,39 @@
+Status: This command will give details about the system status like a number of servers present in the cluster, active server count, and average load value.
+>>status
+>>status 'summary' 
+>>status 'simple'
+>>status 'detailed'
+
+Whoami: This command “whoami” is used to return the current HBase user information from the HBasecluster.
+>>whoami
+
+Tables Managements commands:
+tablename: 'kccs' (with inverted commas)
+columnfamilyname: 'Students' (with inverted commas)
+>>create <tablename>, <columnfamilyname>
+>>list
+>>describe <table name>
+>>disable <tablename>
+>>enable <tablename> 
+>>show_filters
+>>drop <table name>
+>>alter <tablename>, NAME=><column familyname>, VERSIONS=>5
+
+Data manipulation commands:
+>>count <'tablename'>, CACHE =>1000
+>>put <'tablename'>,<'rowname'>,<'columnvalue'>,<'value'> 
+>>get <'tablename'>, <'rowname'>, {< Additional parameters>} 
+>>delete <'tablename'>,<'row name'>,<'column name'>
+>>deleteall <'tablename'>, <'rowname'>
+>>truncate <tablename> 
+>>scan <'tablename'>
+
+4 hive commands[ till create table]
+>>show databases;
+>>create database demo;
+>>drop database demo;
+>>describe database extended demo;
+>>create table demo.employee (Id int, Name string , Salary float) row format delimited fields terminated by ',' ;
+>>describe demo.employee;
+>>use demo;
+>>drop table demo.employee;
