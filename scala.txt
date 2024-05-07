@@ -1,0 +1,14 @@
+https://scala-lang.org/download/2.12.10.html
+
+>>scala -version
+>>scala
+
+run this commands in normal terminal, not be run inside the scala terminal
+>>scalac hello.scala
+
+object Geeks {
+  def main(args: Array[String])
+  {     
+    println("Hello World!") 
+  }
+}
