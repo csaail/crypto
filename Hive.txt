@@ -1,0 +1,8 @@
+>>show databases;
+>>create database demo;
+>>drop database demo;
+>>describe database extended demo;
+>>create table demo.employee (Id int, Name string , Salary float) row format delimited fields terminated by ',' ;
+>>describe demo.employee;
+>>use demo;
+>>drop table demo.employee;
