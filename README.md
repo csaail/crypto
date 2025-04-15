@@ -1,6 +1,3 @@
-
-If you want a more complete version (with project title and usage), here's an extended version:
-
 ```markdown
 # Crypto Stego Tool
 
